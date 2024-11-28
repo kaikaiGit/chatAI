@@ -1,3 +1,17 @@
+/* AI对话API的请求体类型 */
+export interface XunFeiRequest {
+  model: string,
+  messages: Array<RequestMessage>,
+  top_k: number,
+  stream: boolean
+}
+
+export interface RequestMessage {
+  role: string,
+  content: string
+}
+
+/* AI对话API的响应体类型 */
 export interface XunFeiResponse {
   code: number,
   message: string,
