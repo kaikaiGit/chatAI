@@ -1,11 +1,9 @@
-/*导入http模块*/
+/* 导入http模块 */
 import http from '@ohos.net.http';
 import { BusinessError } from '@ohos.base';
+/* 导入AI对话的相关数据模型 */
+import { XunFeiRequest, XunFeiResponse, Message } from '../models/XunFeiAI'
 
-import { XunFeiRequest, XunFeiResponse } from '../models/XunFeiAI'
-
-// 创建http请求对象
-const httpRequest = http.createHttp();
 // api地址
 const url: string = "https://spark-api-open.xf-yun.com/v1/chat/completions";
 const headers: Record<string, string> = { // 设置请求头
@@ -29,7 +27,9 @@ const data: XunFeiRequest = {  // 请求数据
 };
 
 // 向AI对话api发送请求
-export const requestAI = (question: string): Promise<string> => {
+export default function requestAI(question: string): Promise<Message> {
+  // 创建http请求对象
+  const httpRequest = http.createHttp();
   data.messages[data.messages.length-1].content = question; // 更新请求内容，替换为提问内容
   return new Promise( (resolve,reject) => {
     httpRequest.request(
@@ -41,17 +41,20 @@ export const requestAI = (question: string): Promise<string> => {
       },
       (err, response: http.HttpResponse) => {
         if (err || response.responseCode !== 200) {  // 失败处理逻辑
-          reject(err.toString() || `HTTP error! status: ${response.responseCode}`);
+          reject(err || new Error(`HTTP error! status: ${response.responseCode}`));
+          // 当该请求使用完毕时，调用destroy方法主动销毁
+          httpRequest.destroy()
           return;
         }
-
         try {
           // 解析响应数据
           const result: XunFeiResponse = JSON.parse(response.result.toString());
-          console.log(result.choice[0].message.content); // tofix: 打印响应结果
-          resolve(result.choice[0].message.content)
+          resolve(result.choices[0].message)
         } catch (parseError) {
           reject(parseError)
+        } finally {
+          // 当该请求使用完毕时，调用destroy方法主动销毁
+          httpRequest.destroy()
         }
       }
     )

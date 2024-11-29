@@ -11,6 +11,10 @@
     {
       "name": "EntryAbility_label",
       "value": "chatAI"
+    },
+    {
+      "name": "Typing_Text",
+      "value": "对方正在输入中"
     }
   ]
 }

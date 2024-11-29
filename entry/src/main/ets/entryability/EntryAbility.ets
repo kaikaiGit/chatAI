@@ -22,6 +22,8 @@ export default class EntryAbility extends UIAbility {
         return;
       }
       hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
+      // 查询对话记录
+      PersistentStorage.persistProp('chatListProp', []);
     });
   }
 
