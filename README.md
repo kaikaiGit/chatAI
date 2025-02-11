@@ -24,5 +24,9 @@
 3. **数据存储模块**：基于本地持久化存储，存储用户会话数据和历史记录。
 
 ## 演示视频：
-https://github.com/user-attachments/assets/a425814e-386d-4242-b206-78dfdc2710c7
+[点击观看视频](https://github.com/kaikaiGit/chatAI/blob/main/chatAI_effect.mp4)
+<video width="560" height="315" controls>
+  <source src="https://github.com/kaikaiGit/chatAI/blob/main/chatAI_effect.mp4" type="video/mp4">
+  您的浏览器不支持视频标签。
+</video>
 
