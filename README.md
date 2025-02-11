@@ -23,6 +23,6 @@
 2. **AI接口模块**：调用 AI 接口并处理返回promise异步请求结果。
 3. **数据存储模块**：基于本地持久化存储，存储用户会话数据和历史记录。
 
-
-
+## 演示视频：
+https://github.com/user-attachments/assets/a425814e-386d-4242-b206-78dfdc2710c7
 
